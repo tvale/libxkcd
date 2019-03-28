@@ -1,4 +1,6 @@
 # libxkcd
+[![Build Status](https://travis-ci.com/tvale/libxkcd.svg?branch=master)](https://travis-ci.com/tvale/libxkcd)
+
 Library to navigate xkcd comics.
 
 ## Dependencies
