@@ -16,3 +16,5 @@ script:
     - meson -Db_coverage=true build
     - cd build
     - ninja test
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
