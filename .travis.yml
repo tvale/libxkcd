@@ -1,0 +1,18 @@
+language: c
+dist: xenial
+addons:
+    apt:
+        packages:
+            - pkg-config
+            - cmake
+            - libcurl4-openssl-dev
+            - libxml2-dev
+            - ninja-build
+            - python3-pip
+            - python3-setuptools
+install:
+    - pip3 install meson
+script:
+    - meson -Db_coverage=true build
+    - cd build
+    - ninja test
