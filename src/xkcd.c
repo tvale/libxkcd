@@ -197,7 +197,7 @@ end:
   return error;
 }
 
-#define XPATH_COMIC_IMG "//div[@id=\"comic\"]/img"
+#define XPATH_COMIC_IMG "//div[@id=\"comic\"]//img"
 #define DOUBLE_SLASH "//"
 #define DOUBLE_SLASH_SIZE 2
 #define ATTRIBUTE_SRC "src"

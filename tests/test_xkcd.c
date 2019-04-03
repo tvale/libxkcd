@@ -399,6 +399,15 @@ CTEST(xkcd_public, get_text)
   xkcd_free(comic);
 }
 
+CTEST(issues, comics_with_hyperlinks)
+{
+  struct xkcd* comic = xkcd_new();
+  ASSERT_NOT_NULL(comic);
+
+  enum xkcd_error_code error_code = xkcd_jump_to(comic, "1000");
+  ASSERT_EQUAL(XKCD_OK, error_code);
+}
+
 int
 main(int argc, char const* argv[])
 {
