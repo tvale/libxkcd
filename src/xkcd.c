@@ -335,6 +335,12 @@ end:
   return result;
 }
 
+bool
+xkcd_has_previous(struct xkcd const* const self)
+{
+  return self->has_previous;
+}
+
 enum xkcd_error_code
 xkcd_previous(struct xkcd* const self)
 {
@@ -345,6 +351,12 @@ xkcd_previous(struct xkcd* const self)
   }
 
   return error_code;
+}
+
+bool
+xkcd_has_next(struct xkcd const* const self)
+{
+  return self->has_next;
 }
 
 enum xkcd_error_code

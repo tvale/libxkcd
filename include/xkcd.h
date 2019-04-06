@@ -1,6 +1,7 @@
 #ifndef XKCD_H
 #define XKCD_H
 
+#include <stdbool.h>
 #include <stddef.h> // size_t
 
 struct xkcd;
@@ -23,8 +24,14 @@ xkcd_latest(struct xkcd* const self);
 enum xkcd_error_code
 xkcd_jump_to(struct xkcd* const self, char const* const comic_id);
 
+bool
+xkcd_has_previous(struct xkcd const* const self);
+
 enum xkcd_error_code
 xkcd_previous(struct xkcd* const self);
+
+bool
+xkcd_has_next(struct xkcd const* const self);
 
 enum xkcd_error_code
 xkcd_next(struct xkcd* const self);

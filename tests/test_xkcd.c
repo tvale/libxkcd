@@ -331,6 +331,24 @@ CTEST(xkcd_public, jump_to)
   xkcd_free(comic);
 }
 
+CTEST(xkcd_public, has_previous)
+{
+  struct xkcd* comic = xkcd_new();
+  ASSERT_NOT_NULL(comic);
+
+  enum xkcd_error_code error_code = xkcd_jump_to(comic, "1");
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  bool has = xkcd_has_previous(comic);
+  ASSERT_FALSE(has);
+
+  error_code = xkcd_next(comic);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  has = xkcd_has_previous(comic);
+  ASSERT_TRUE(has);
+}
+
 CTEST(xkcd_public, previous)
 {
   struct xkcd* comic = xkcd_new();
@@ -345,6 +363,24 @@ CTEST(xkcd_public, previous)
   validate_comic_303(comic);
 
   xkcd_free(comic);
+}
+
+CTEST(xkcd_public, has_next)
+{
+  struct xkcd* comic = xkcd_new();
+  ASSERT_NOT_NULL(comic);
+
+  enum xkcd_error_code error_code = xkcd_latest(comic);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  bool has = xkcd_has_next(comic);
+  ASSERT_FALSE(has);
+
+  error_code = xkcd_previous(comic);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  has = xkcd_has_next(comic);
+  ASSERT_TRUE(has);
 }
 
 CTEST(xkcd_public, next)
