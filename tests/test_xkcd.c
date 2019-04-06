@@ -408,6 +408,30 @@ CTEST(issues, comics_with_hyperlinks)
   ASSERT_EQUAL(XKCD_OK, error_code);
 }
 
+CTEST(issues, error_previous_on_first)
+{
+  struct xkcd* comic = xkcd_new();
+  ASSERT_NOT_NULL(comic);
+
+  enum xkcd_error_code error_code = xkcd_jump_to(comic, "1");
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  error_code = xkcd_previous(comic);
+  ASSERT_EQUAL(XKCD_ERROR, error_code);
+}
+
+CTEST(issues, error_next_on_latest)
+{
+  struct xkcd* comic = xkcd_new();
+  ASSERT_NOT_NULL(comic);
+
+  enum xkcd_error_code error_code = xkcd_latest(comic);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  error_code = xkcd_next(comic);
+  ASSERT_EQUAL(XKCD_ERROR, error_code);
+}
+
 int
 main(int argc, char const* argv[])
 {

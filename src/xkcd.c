@@ -338,13 +338,25 @@ end:
 enum xkcd_error_code
 xkcd_previous(struct xkcd* const self)
 {
-  return xkcd_jump_to(self, self->previous_id);
+  enum xkcd_error_code error_code = XKCD_ERROR;
+
+  if (self->has_previous) {
+    error_code = xkcd_jump_to(self, self->previous_id);
+  }
+
+  return error_code;
 }
 
 enum xkcd_error_code
 xkcd_next(struct xkcd* const self)
 {
-  return xkcd_jump_to(self, self->next_id);
+  enum xkcd_error_code error_code = XKCD_ERROR;
+
+  if (self->has_next) {
+    error_code = xkcd_jump_to(self, self->next_id);
+  }
+
+  return error_code;
 }
 
 enum xkcd_error_code
