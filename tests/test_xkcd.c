@@ -416,6 +416,48 @@ CTEST(xkcd_public, next)
   xkcd_free(comic);
 }
 
+CTEST(xkcd_public, get_id)
+{
+  struct xkcd* comic = xkcd_new();
+  ASSERT_NOT_NULL(comic);
+
+  enum xkcd_error_code error_code = xkcd_jump_to(comic, "303");
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  char* comic_id = NULL;
+  error_code = xkcd_get_id(comic, &comic_id);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+  ASSERT_STR("303", comic_id);
+  free(comic_id);
+  comic_id = NULL;
+
+  error_code = xkcd_previous(comic);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  error_code = xkcd_get_id(comic, &comic_id);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+  ASSERT_STR("302", comic_id);
+  free(comic_id);
+
+  error_code = xkcd_next(comic);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  error_code = xkcd_get_id(comic, &comic_id);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+  ASSERT_STR("303", comic_id);
+  free(comic_id);
+
+  error_code = xkcd_latest(comic);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+
+  error_code = xkcd_get_id(comic, &comic_id);
+  ASSERT_EQUAL(XKCD_OK, error_code);
+  ASSERT_STR(COMIC_ID_LATEST, comic_id);
+  free(comic_id);
+
+  xkcd_free(comic);
+}
+
 CTEST(xkcd_public, get_comic)
 {
   struct xkcd* comic = xkcd_new();

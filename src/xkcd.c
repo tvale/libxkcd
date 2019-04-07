@@ -302,11 +302,10 @@ xkcd_free(struct xkcd* const self)
   free(self);
 }
 
-#define LATEST_COMIC_ID ""
 enum xkcd_error_code
 xkcd_latest(struct xkcd* const self)
 {
-  return xkcd_jump_to(self, LATEST_COMIC_ID);
+  return xkcd_jump_to(self, COMIC_ID_LATEST);
 }
 
 enum xkcd_error_code
@@ -325,6 +324,8 @@ xkcd_jump_to(struct xkcd* const self, char const* const comic_id)
     goto end_with_buffer_cleanup;
   }
   xmlXPathContextPtr xpath = maybe_xpath.u.xpath;
+
+  strcpy(self->id, comic_id);
 
   bool error = get_comic_id(
     xpath, XKCD_DIRECTION_PREVIOUS, &self->has_previous, self->previous_id);
@@ -386,6 +387,24 @@ xkcd_next(struct xkcd* const self)
   }
 
   return error_code;
+}
+
+enum xkcd_error_code
+xkcd_get_id(struct xkcd const* const self, char** comic_id)
+{
+  enum xkcd_error_code result = XKCD_ERROR;
+
+  *comic_id = calloc(strlen(self->id) + 1, sizeof(char));
+  if (*comic_id == NULL) {
+    goto end;
+  }
+
+  strcpy(*comic_id, self->id);
+
+  result = XKCD_OK;
+
+end:
+  return result;
 }
 
 enum xkcd_error_code

@@ -54,6 +54,9 @@ enum xkcd_error_code
 xkcd_next(struct xkcd* const self);
 
 enum xkcd_error_code
+xkcd_get_id(struct xkcd const* const self, char** comic_id);
+
+enum xkcd_error_code
 xkcd_get_comic(struct xkcd const* const self,
                unsigned char** image,
                size_t* image_size);

@@ -29,6 +29,7 @@ struct comic
   size_t data_size;
 };
 
+#define COMIC_ID_LATEST ""
 #define COMIC_ID_MAX_SIZE 64
 struct xkcd
 {
@@ -36,6 +37,7 @@ struct xkcd
   char previous_id[COMIC_ID_MAX_SIZE];
   bool has_next;
   char next_id[COMIC_ID_MAX_SIZE];
+  char id[COMIC_ID_MAX_SIZE];
   struct comic image;
 };
 
