@@ -7,7 +7,6 @@ dynamic_buffer_test = executable('dynamic_buffer_test',
     objects: dynamic_buffer_object,
     include_directories: [ctest_header, private_headers]
 )
-test('dynamic buffer', dynamic_buffer_test)
 
 xkcd_test = executable('xkcd_test',
     sources: files('test_xkcd.c'),
@@ -15,4 +14,7 @@ xkcd_test = executable('xkcd_test',
     dependencies: [libcurl, libxml2],
     link_with: libxkcd
 )
-test('xkcd', xkcd_test)
+if not meson.is_subproject()
+    test('dynamic buffer', dynamic_buffer_test)
+    test('xkcd', xkcd_test)
+endif
